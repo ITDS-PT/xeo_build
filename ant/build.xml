@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<project 	name="XEO 3.1" default="all" basedir=".">
+<property file="global.properties" />
+<property name='global.dir' value='${basedir}\${xeo.ver}\'/>
+<mkdir dir='${global.dir}' />
+<target name="all" depends="core,xwc"/>
+<!-- Main target -->
+<!-- Compile Java Files and store in /build/src directory -->
+<target name="core" >
+	<subant>
+	    <fileset dir="." includes="build_core.xml"/>
+	</subant>
+</target>
+
+<target name="xwc" >
+	<subant>
+	    <fileset dir="." includes="build_xwc.xml"/>
+	</subant>
+</target>
+
+</project>

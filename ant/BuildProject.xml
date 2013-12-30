@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<project name="XEO 3.0" default="all" basedir=".">
+	<!-- Note: JavascriptLint (jsl) must be in the user's path -->
+	<property file="global.properties" />
+
+	<property name="project.name" value="XEO Release" />
+
+	<property name="global.dir" value="${basedir}/${xeo.ver}" />
+	<property name="webapp.dir" value="${basedir}/${xeo.ver}/xeoxwc/.work/webapps/default" />
+	<property name="project.base" value="${global.dir}/${project.name}" />
+	
+	<!-- Set the executable javascriptLint according to the operating system -->
+	<condition property="jsl" value="jsl.exe" else="jsl">
+		<os family="windows" /> 
+	 </condition>
+
+
+	<!-- Main target -->
+	<target name="all">
+		<property name="project.name" value="proj_xeoxwc" />
+		<property name="project.base" value="${global.dir}/${project.name}" />
+
+		<mkdir dir='${project.base}' />
+		<echo file='${project.base}/xeocore.ver' message='${xeo.ver}' />
+		
+		<antcall target='validateJS' />
+		
+		<antcall target='coreFolder' />
+		<antcall target='xwcFolder' />
+	
+
+		<antcall target='buildxar' />
+	</target>
+
+
+	<target name="coreFolder">
+		<mkdir dir='${project.base}/project_lib' />
+		<copy todir="${project.base}">
+			<fileset dir="${global.dir}/xeocore">
+				<exclude name="**/.work/**" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="xwcFolder" depends="coreFolder">
+		<copy todir="${project.base}" overwrite='true'>
+			<fileset dir="${global.dir}/xeoxwc/">
+				<exclude name="**/.work/**" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="buildxar">
+		<jar jarfile='${project.base}/../xeocore.xar'>
+			<fileset dir="${project.base}/" excludes='**/oc4j-*' />
+		</jar>
+	</target>
+
+	<target name="commit">
+		<mkdir dir='\\marte\Developers\xeo\3.1\${xeo.build}' />
+		<copy todir="\\marte\Developers\xeo\3.1\${xeo.build}">
+			<fileset dir="${global.dir}" />
+		</copy>
+	</target>
+	
+	
+	<!-- JavaScript Validation -->
+
+	<target name='validateJS' depends="prepare,jsl,jslwarning,clean">
+		<echo>Validating Javascript</echo>
+	</target>
+
+	<target name='prepare'>
+		<echo>Copy files</echo>
+		<copy file='../jsLint/jsl.error.conf' todir="${xeo.build}" />
+		<copy file='../jsLint/jsl.warning.conf' todir="${xeo.build}" />
+	</target>
+
+	<target name='clean'>
+		<echo>Cleanup Files</echo>
+		<delete file="${xeo.build}/jsl.error.conf" />
+		<delete file="${xeo.build}/jsl.warning.conf" />
+	</target>
+
+
+	<target name="jsl" description="Checks Javascript files for error conditions (aborts on error)">
+		<echo>Check for Javascript Errors</echo>
+		<exec executable="../jsLint/${jsl}" failonerror='true'>
+			<arg value="-conf" />
+			<arg file="./${xeo.build}/jsl.error.conf" />
+			<arg value="-nologo" />
+
+			<arg value="-process" />
+			<arg value="${webapp.dir}/ext-xeo/*.js" />
+
+			<arg value="-process" />
+			<arg value="${webapp.dir}/ext-xeo/js/*.js" />
+
+			<arg value="-process" />
+			<arg value="${webapp.dir}/ext-xeo/js/localization/*.js" />
+
+			<arg value="-process" />
+			<arg value="${webapp.dir}/jquery-xeo/*.js" />
+
+			<arg value="-process" />
+			<arg value="${webapp.dir}/js/fileupload/xwc-upload.js" />
+
+			<arg value="-process" />
+			<arg value="${webapp.dir}/extjs/grid/*.js" />
+
+			<arg value="-process" />
+			<arg value="${webapp.dir}/extjs/grid/filter/*.js" />
+
+			<arg value="-process" />
+			<arg value="${webapp.dir}/xwc/js/*.js" />
+
+			<arg value="-process" />
+			<arg value="${webapp.dir}/xwc/js/localization/*.js" />
+
+			<arg value="-nosummary" />
+		</exec>
+	</target>
+	<target name="jslwarning" description="Checks Javascripts for Warnings">
+		<echo>Check for Javascript Warnings</echo>
+		<exec executable="../jsLint/${jsl}">
+			<arg value="-conf" />
+			<arg file="./${xeo.build}/jsl.warning.conf" />
+			<arg value="-nologo" />
+			<arg value="-process" />
+			<arg value="${webapp.dir}/ext-xeo/*.js" />
+
+			<arg value="-process" />
+			<arg value="${webapp.dir}/ext-xeo/js/*.js" />
+
+			<arg value="-process" />
+			<arg value="${webapp.dir}/ext-xeo/js/localization/*.js" />
+
+			<arg value="-process" />
+			<arg value="${webapp.dir}/jquery-xeo/*.js" />
+
+			<arg value="-process" />
+			<arg value="${webapp.dir}/js/fileupload/xwc-upload.js" />
+
+			<arg value="-process" />
+			<arg value="${webapp.dir}/extjs/grid/*.js" />
+
+			<arg value="-process" />
+			<arg value="${webapp.dir}/extjs/grid/filter/*.js" />
+
+			<arg value="-process" />
+			<arg value="${webapp.dir}/xwc/js/*.js" />
+
+			<arg value="-process" />
+			<arg value="${webapp.dir}/xwc/js/localization/*.js" />
+			<arg value="-nosummary" />
+		</exec>
+	</target>
+
+
+
+</project>

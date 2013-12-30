@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<project 	name="XEO 3.1" default="all" basedir=".">
+<property file="global.properties"/>
+<property name='global.dir' value='${basedir}\${xeo.ver}\'/>
+
+<property name="module.name" 		value="xeocore"/>
+
+<property name="dirs.base" 	value="${global.dir}"/>
+<property name="build" 		value="${dirs.base}\${module.name}\.work"/>
+<property name="src" 		value="${build}\src"/>
+<property name="classdir" 	value="${build}\classes"/>
+<property name="docdir" 	value="${build}\doc"/>
+
+<property name="module.name" 		value="xeocore"/>
+
+<property name="module_jar"		value="${build}\${module.name}.jar"/>
+<property name="module_doc"		value="${build}\${module.name}_doc.zip"/>
+<property name="module_src"		value="${build}\${module.name}_src.zip"/>
+<property name="module.base" 		value="${global.dir}\${module.name}"/>
+<property name="deploy_module_lib"	value="${module.base}\base_lib\modules_lib"/>
+<property name="deploy_module_j2ee"	value="${module.base}\base_lib\j2ee"/>
+<property name="deploy_module"		value="${module.base}\base_lib\modules"/>
+<property name="deploy_module_web"	value="${module.base}\base_lib\modules_web\${module.name}"/>
+
+<property name="deploy_module_bodef"	value="${module.base}\bodef"/>
+<property name="deploy_module_uidef"	value="${module.base}\uidef"/>
+<property name="deploy_module_wordTemplates"	value="${module.base}\wordTemplates"/>
+
+<mkdir dir='${build}' />
+
+<!-- Clean builds 
+<delete dir="${build}/"/>
+-->
+
+<!-- Main target -->
+<target name="all" depends="init,compile,module"/>
+
+<target name="clean">
+ <delete includeEmptyDirs="true">
+    <fileset dir="${build}" />
+  </delete>
+</target>
+
+<target name="init">
+	
+
+ <exec executable="git">
+	 <arg line="clone ${xeo.git} ${global.dir}/${module.name}/.work"/>
+  </exec>
+  
+  <mkdir dir="${global.dir}/${module.name}/.work/base_lib/modules"/>  
+	<mkdir dir="${global.dir}/${module.name}/.work/base_lib/modules_lib"/>
+	<mkdir dir="${global.dir}/${module.name}/.work/base_lib/modules_web"/>
+	
+</target>
+
+
+<!-- Compile Java Files and store in /build/src directory -->
+<target name="compile" >
+
+	<copy todir="${classdir}">
+	    <fileset dir="${src}">
+	      <exclude name="**/*.java"/>
+	      <exclude name="**/ejb-jar.xml"/>
+	    </fileset>
+	</copy>	
+
+	<path id='libs'>
+		<fileset dir="${build}\project_lib\" includes="*.jar"/>
+		<fileset dir="${build}\base_lib\j2ee\" includes="*.jar"/>
+		<fileset dir="${build}\base_lib\modules\" includes="*.jar"/>
+		<fileset dir="${build}\base_lib\modules_lib\" includes="*.jar"/>
+	</path>
+	
+	<javac memoryinitialsize="256m" 
+		memorymaximumsize="256m" 
+		fork="true" 
+		srcdir="${src}" 
+		optimize="on" 
+		destdir="${classdir}" 
+		debug="on"
+                encoding="UTF-8" 
+		includes="**/*.java" 
+	>
+		<classpath refid='libs'/>
+	</javac>
+</target>
+
+<target name="module" >
+	<echo file='${classdir}/xeocore.ver' message='${xeo.ver}' />
+
+	<jar jarfile="${module_jar}" basedir="${classdir}" />	
+	<jar jarfile="${module_doc}" basedir="${docdir}" />	
+	<jar jarfile="${module_src}" basedir="${src}" />	
+
+	<echo message='Copy to ${deploy_module_web}  ${build}\webapps\default\' />
+
+	<copy todir="${deploy_module_web}">
+	    <fileset dir="${build}\webapps\default\"></fileset>
+	</copy>
+	
+	<copy todir="${module.base}\src\">
+	    <fileset dir="${src}">
+	      <include name="**/ejb-jar.xml"/>
+	    </fileset>
+	</copy>	
+
+	<copy todir="${module.base}">
+	    <fileset dir="${build}">
+	      <include name="xeoModel.xsd"/>
+	    </fileset>
+	</copy>	
+
+	<copy todir="${module.base}\webapps\default\">
+	    <fileset dir="${build}\webapps\default\">
+	      <include name="**/web.xml"/>
+	      <include name="**/faces-config.xml"/>
+	    </fileset>
+	</copy>	
+	<mkdir dir="${module.base}\webapps\default\WEB-INF\classes" />
+	<echo file="${module.base}\webapps\default\WEB-INF\classes\xeo.home" message="Do not delete! used to xeo locate the boconfig.xml!" />
+
+	<copy file='${module_jar}' todir="${deploy_module}"/>
+	<copy file='${module_doc}' todir="${deploy_module}"/>
+	<copy file='${module_src}' todir="${deploy_module}"/>
+
+	<copy todir="${deploy_module_lib}">
+	    <fileset dir="${build}\project_lib\"></fileset>
+	</copy>	
+	<copy todir="${deploy_module_j2ee}">
+	    <fileset dir="${build}\base_lib\j2ee\"></fileset>
+	</copy>	
+	<copy todir="${deploy_module}">
+	    <fileset dir="${build}\base_lib\modules\"></fileset>
+	</copy>	
+
+	<copy todir="${deploy_module}">
+	    <fileset dir="${build}\base_lib\modules\"></fileset>
+	</copy>	
+	
+	<copy todir="${deploy_module_bodef}">
+	    <fileset dir="${build}\bodef\"></fileset>
+	</copy>	
+
+	<copy todir="${deploy_module_uidef}">
+	    <fileset dir="${build}\uidef\"></fileset>
+	</copy>	
+
+	<copy todir="${deploy_module_uidef}">
+	    <fileset dir="${build}\uidef\"></fileset>
+	</copy>	
+
+	<copy todir="${module.base}">
+	    <fileset dir="${build}" includes="*.xml" excludes='principals.xml' />
+	</copy>
+
+</target>
+
+</project>
