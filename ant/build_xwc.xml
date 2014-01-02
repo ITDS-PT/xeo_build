@@ -97,7 +97,7 @@
 		
 		<echo>Compressing JS</echo>
 		<java jar="../lib/yuicompressor-2.4.8.jar" fork="true">
-		<arg line="-o '.js$:-min.js' ${webapp.dir}/minified/*.js" />
+		<arg line="-o '.js$:-min.js' ${webapp.dir}/minified" />
 		<classpath>
             <pathelement location="../lib/yuicompressor-2.4.8.jar"/>
         </classpath>
@@ -105,7 +105,7 @@
 		
 		<echo>Compressing JS</echo>
 		<java jar="../lib/yuicompressor-2.4.8.jar" fork="true">
-        <arg line="-o '.css$:-min.css' ${webapp.dir}/minified/*.css" />
+        <arg line="-o '.css$:-min.css' ${webapp.dir}/minified" />
         <classpath>
             <pathelement location="../lib/yuicompressor-2.4.8.jar"/>
         </classpath>
