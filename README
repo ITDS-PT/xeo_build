@@ -5,3 +5,5 @@ XEO Build System Instructions
 1) Set the version and path to git repositories in global.properties (xeo.buildnumber,xeo.git and xwc.git properties respectively)
 2) Run ant -f build.xml to create necessary structures
 3) Run ant -f BuildProject.xml to generate the XAR file
+
+NOTES : Currently it does not create tags in the repository nor does it copy the generated to XAR to anywhere
