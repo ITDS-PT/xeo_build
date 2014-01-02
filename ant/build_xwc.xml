@@ -96,18 +96,18 @@
 		</java>
 		
 		<echo>Compressing JS</echo>
-		<java jar="../lib/yuicompressor-2.4.7.jar" fork="true">
+		<java jar="../lib/yuicompressor-2.4.8.jar" fork="true">
 		<arg line="-o '.js$:-min.js' ${webapp.dir}/minified/*.js" />
 		<classpath>
-            <pathelement location="../lib/yuicompressor-2.4.7.jar"/>
+            <pathelement location="../lib/yuicompressor-2.4.8.jar"/>
         </classpath>
 		</java>
 		
-		<echo>Compressing JS</echo>
-		<java jar="../lib/yuicompressor-2.4.7.jar" fork="true">
+		<echo>Compressing CSS</echo>
+		<java jar="../lib/yuicompressor-2.4.8.jar" fork="true">
         <arg line="-o '.css$:-min.css' ${webapp.dir}/minified/*.js" />
         <classpath>
-            <pathelement location="../lib/yuicompressor-2.4.7.jar"/>
+            <pathelement location="../lib/yuicompressor-2.4.8.jar"/>
         </classpath>
 		</java>
 		
