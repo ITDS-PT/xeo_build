@@ -83,7 +83,8 @@
 
 <target name='minifyJS'>
 	
-		<mkdir dir='${webapp.dir}/minified' />
+		<mkdir dir='${webapp.dir}/minified/' />
+		<echo>Concatenating CSS and JS</echo>
 		<java jar="../lib/concatenator.jar" fork="true">
 			<arg value="${xeo.languages}" /> 
 			<arg value="${webapp.dir}" /> 
@@ -94,6 +95,7 @@
 			</classpath>
 		</java>
 		
+		<echo>Compressing JS</echo>
 		<java jar="../lib/yuicompressor-2.4.8.jar" fork="true">
 		<arg line="-o '.js$:-min.js' ${webapp.dir}/minified/*.js" />
 		<classpath>
@@ -101,6 +103,7 @@
         </classpath>
 		</java>
 		
+		<echo>Compressing JS</echo>
 		<java jar="../lib/yuicompressor-2.4.8.jar" fork="true">
         <arg line="-o '.css$:-min.css' ${webapp.dir}/minified/*.css" />
         <classpath>
@@ -108,6 +111,7 @@
         </classpath>
 		</java>
 		
+		<echo>Generating MD5</echo>
 		<checksum>
 		  <fileset dir="${webapp.dir}/minified">
 			<include name="concatenated*"/>
