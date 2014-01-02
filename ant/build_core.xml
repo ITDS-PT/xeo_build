@@ -26,8 +26,6 @@
 <property name="deploy_module_uidef"	value="${module.base}\uidef"/>
 <property name="deploy_module_wordTemplates"	value="${module.base}\wordTemplates"/>
 
-<mkdir dir='${build}' />
-
 <!-- Clean builds 
 <delete dir="${build}/"/>
 -->
