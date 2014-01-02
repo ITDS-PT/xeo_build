@@ -43,7 +43,7 @@
 
 <target name="init">
  <exec executable="git">
-	 <arg line="clone ${xwc.git} ${global.dir}/${module.name}/.work"/>
+	 <arg line="clone ${xwc.git} ${build}/"/>
   </exec>
   <mkdir dir="${global.dir}/${module.name}/.work/uidef"/>
 </target>

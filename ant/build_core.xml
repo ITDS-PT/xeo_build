@@ -43,7 +43,7 @@
 	
 
  <exec executable="git">
-	 <arg line="clone ${xeo.git} ${global.dir}/${module.name}/.work"/>
+	 <arg line="clone ${xeo.git} ${build}/"/>
   </exec>
   
   <mkdir dir="${global.dir}/${module.name}/.work/base_lib/modules"/>  
