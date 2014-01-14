@@ -96,20 +96,29 @@
 		</java>
 		
 		<echo>Compressing JS</echo>
-		<java jar="../lib/yuicompressor-2.4.8.jar" fork="true">
+		<exec executable="java" failonerror="true">
+		      <arg line="-classpath . -jar ../lib/yuicompressor-2.4.8.jar -o '.js$:-min.js' ${webapp.dir}/minified/*.js"/>
+		</exec>	
+	
+		<echo>Compressing JS</echo>
+		<exec executable="java" failonerror="true">
+		      <arg line="-classpath . -jar ../lib/yuicompressor-2.4.8.jar -o '.css$:-min.css' ${webapp.dir}/minified/*.css"/>
+		</exec>	
+	
+		<!--<java jar="../lib/yuicompressor-2.4.8.jar" fork="true">
 		<arg line="-o '.js$:-min.js' ${webapp.dir}/minified/*.js" />
 		<classpath>
             <pathelement location="../lib/yuicompressor-2.4.8.jar"/>
         </classpath>
-		</java>
+		</java>-->
 		
-		<echo>Compressing CSS</echo>
+		<!--<echo>Compressing CSS</echo>
 		<java jar="../lib/yuicompressor-2.4.8.jar" fork="true">
         <arg line="-o '.css$:-min.css' ${webapp.dir}/minified/*.js" />
         <classpath>
             <pathelement location="../lib/yuicompressor-2.4.8.jar"/>
         </classpath>
-		</java>
+		</java>-->
 		
 		<echo>Generating MD5</echo>
 		<checksum>
