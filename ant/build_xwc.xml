@@ -97,12 +97,12 @@
 		
 		<echo>Compressing JS</echo>
 		<exec executable="java" failonerror="true">
-		      <arg line="-classpath . -jar ../lib/yuicompressor-2.4.8.jar -o '.js$:-min.js' ${webapp.dir}/minified/*.js"/>
+		      <arg line="-classpath . -jar ../lib/yuicompressor-2.4.8.jar -o '.js$:-min.js' ${xeo.ver}/${module.name}/.work/webapps/default/minified/*.js"/>
 		</exec>	
 	
 		<echo>Compressing JS</echo>
 		<exec executable="java" failonerror="true">
-		      <arg line="-classpath . -jar ../lib/yuicompressor-2.4.8.jar -o '.css$:-min.css' ${webapp.dir}/minified/*.css"/>
+		      <arg line="-classpath . -jar ../lib/yuicompressor-2.4.8.jar -o '.css$:-min.css' ${xeo.ver}/${module.name}/.work/webapps/default/minified/*.css"/>
 		</exec>	
 	
 		<!--<java jar="../lib/yuicompressor-2.4.8.jar" fork="true">
