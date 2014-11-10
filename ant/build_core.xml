@@ -43,7 +43,7 @@
 	
 
  <exec executable="git">
-	 <arg line="clone ${xeo.git} ${build}/"/>
+	 <arg line="clone -b ${xeo.branch} ${xeo.git} ${build}/"/>
   </exec>
   
   <mkdir dir="${global.dir}/${module.name}/.work/base_lib/modules"/>  
@@ -71,6 +71,7 @@
 	</path>
 	
 	<javac memoryinitialsize="256m" 
+		executable='C:\jdk1.6.0_43\bin\javac.exe'
 		memorymaximumsize="256m" 
 		fork="true" 
 		srcdir="${src}" 
@@ -84,7 +85,7 @@
 	</javac>
 </target>
 
-<target name="module" >
+<target name="module">
 	<echo file='${classdir}/xeocore.ver' message='${xeo.ver}' />
 
 	<jar jarfile="${module_jar}" basedir="${classdir}" />	

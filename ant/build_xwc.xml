@@ -43,7 +43,7 @@
 
 <target name="init">
  <exec executable="git">
-	 <arg line="clone ${xwc.git} ${build}/"/>
+	 <arg line="clone -b ${xwc.branch} ${xwc.git} ${build}/"/>
   </exec>
   <mkdir dir="${global.dir}/${module.name}/.work/uidef"/>
 </target>
@@ -100,7 +100,7 @@
 		      <arg line="-classpath . -jar ../lib/yuicompressor-2.4.8.jar -o '.js$:-min.js' ${xeo.ver}/${module.name}/.work/webapps/default/minified/*.js"/>
 		</exec>	
 	
-		<echo>Compressing JS</echo>
+		<echo>Compressing CSS</echo>
 		<exec executable="java" failonerror="true">
 		      <arg line="-classpath . -jar ../lib/yuicompressor-2.4.8.jar -o '.css$:-min.css' ${xeo.ver}/${module.name}/.work/webapps/default/minified/*.css"/>
 		</exec>	
