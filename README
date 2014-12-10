@@ -2,7 +2,8 @@ XEO Build System Instructions
 
 0) If the concatenator.jar does not exist, run ant -f build_concatenator.xml
 
-1) Set the version and path to git repositories in ant/global.properties (xeo.buildnumber, xeo.git and xwc.git properties respectively, set the branches you want to build)
+1) Set the version and path to git repositories in ant/global.properties (xeo.buildnumber, xeo.git and xwc.git properties respectively, set the branches you want to build
+ - You can build xeo with a specific branch and xwc with a different branch)
 2) Run ant -f build.xml to create necessary structures
 3) Run ant -f BuildProject.xml to generate the XAR file
 
