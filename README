@@ -6,7 +6,9 @@ XEO Build System Instructions
  - You can build xeo with a specific branch and xwc with a different branch)
 2) Run ant -f build.xml to create necessary structures
 3) Run ant -f BuildProject.xml to generate the XAR file
-
+ 
+ 
+ 
 
 
 NOTES : Currently it does not create tags in the repository nor does it copy the generated to XAR to anywhere
