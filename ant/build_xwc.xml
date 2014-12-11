@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project 	name="XEO 3.1" default="all" basedir=".">
+<project 	name="XEO 4" default="all" basedir=".">
 <property file="global.properties"/>
 <property name='global.dir' value='${basedir}/${xeo.ver}/'/>
 

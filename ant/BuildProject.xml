@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="XEO 3.0" default="all" basedir=".">
+<project name="XEO 4" default="all" basedir=".">
 	<!-- Note: JavascriptLint (jsl) must be in the user's path -->
 	<property file="global.properties" />
 
