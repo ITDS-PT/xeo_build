@@ -152,6 +152,7 @@
 	<copy todir="${module.base}">
 	    <fileset dir="${build}" includes="*.xml" excludes='principals.xml' />
 	</copy>
+	
 
 </target>
 
