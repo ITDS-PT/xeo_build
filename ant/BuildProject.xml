@@ -10,8 +10,16 @@
 	<property name="project.base" value="${global.dir}/${project.name}" />
 	
 	<!-- Set the executable javascriptLint according to the operating system -->
-	<condition property="jsl" value="jsl.exe" else="jsl">
+	<condition property="jsl" value="jsl.exe" >
 		<os family="windows" /> 
+	 </condition>
+
+	<condition property="jsl" value="jsl-mac" >
+		<os family="mac" /> 
+	 </condition>
+
+	<condition property="jsl" value="jsl-linux" >
+		<os family="unix" /> 
 	 </condition>
 
 
