@@ -1,12 +1,13 @@
 XEO Build System Instructions
 
 0) Checkout this project, clone the XEO and XWC Projects to your local hard drive
-1) If the concatenator.jar does not exist, run ant -f build_concatenator.xml to create it
+1) If the concatenator.jar does not exist, generate the JAR from the src folder
 
 2) Set the version and path to git repositories in ant/global.properties 
 	(xeo.buildnumber, path to xeo git repository and xwc git repository properties respectively, set the branches you want to build - You can build xeo with a specific branch and xwc with a different branch)
-3) Run ant -f build.xml to create necessary structures
-4) Run ant -f BuildProject.xml to generate the XAR file
+3) Make sure you are using Java 6 to compile
+4) Run ant -f build.xml to create necessary structures
+5) Run ant -f BuildProject.xml to generate the XAR file
  
  
  
