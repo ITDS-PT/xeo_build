@@ -65,7 +65,8 @@
 		<fileset dir="${module.parent}/base_lib/modules_lib/" includes="*.jar"/>
 	</path>
 	
-	<javac memoryinitialsize="256m" 
+	<javac memoryinitialsize="256m"
+		executable="${java.compiler}"
 		memorymaximumsize="256m" 
 		fork="true" 
 		srcdir="${src}" 
@@ -73,7 +74,7 @@
 		target="1.6" 
 		optimize="on" 
 		destdir="${classdir}" 
-		encoding="Cp1252"
+		encoding="cp1252"
 		debug="on" 
 		includes="**/*.java" 
 	>
@@ -97,12 +98,12 @@
 		
 		<echo>Compressing JS</echo>
 		<exec executable="java" failonerror="true">
-		      <arg line="-classpath . -jar ../lib/yuicompressor-2.4.8.jar -o '.js$:-min.js' ${xeo.ver}/${module.name}/.work/webapps/default/minified/*.js"/>
+		      <arg line="-classpath . -jar ../lib/yuicompressor-2.4.8.jar -o '.js$:-min.js'  --type js ${webapp.dir}/minified/concatenated_en.js ${webapp.dir}/minified/concatenated_es.js ${webapp.dir}/minified/concatenated_pt.js"/>
 		</exec>	
 	
 		<echo>Compressing CSS</echo>
 		<exec executable="java" failonerror="true">
-		      <arg line="-classpath . -jar ../lib/yuicompressor-2.4.8.jar -o '.css$:-min.css' ${xeo.ver}/${module.name}/.work/webapps/default/minified/*.css"/>
+		      <arg line="-classpath . -jar ../lib/yuicompressor-2.4.8.jar -o '.css$:-min.css' ${webapp.dir}/minified/concatenated.css"/>
 		</exec>	
 	
 		<!--<java jar="../lib/yuicompressor-2.4.8.jar" fork="true">

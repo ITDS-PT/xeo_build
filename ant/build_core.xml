@@ -71,7 +71,7 @@
 	</path>
 	
 	<javac memoryinitialsize="256m" 
-		executable='C:\jdk1.6.0_43\bin\javac.exe'
+		executable="${java.compiler}"
 		memorymaximumsize="256m" 
 		fork="true" 
 		srcdir="${src}" 
