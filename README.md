@@ -15,7 +15,8 @@ XEO Build System Instructions
     - xeo.languages (the set of languages the application supports, ex: en,pt,es)
     - xeo.branch (The branch to clone from the XEO git repository ex: master)
     - xwc.branch (The branch to clone from the XwC git repository ex: master)
-3) Make sure you are using Java 6 to compile
+    - java.compiler (Path to the Java 6 compiler)
+3) Make sure you are using Java 6 to compile (see java.compiler property)
 4) Run ant -f build.xml to create necessary structures from the ant/directory
 5) Run ant -f BuildProject.xml to generate the XAR file from the ant/directory
  
